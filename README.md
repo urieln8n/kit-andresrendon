@@ -12,4 +12,4 @@ Web del kit de VICECLIP STUDIO: recursos gratis para crear Shorts con IA y ofert
 
 ## Cómo se publica
 
-GitHub `urieln8n/kit-andresrendon` (rama `main`) → Cloudflare Pages, proyecto `kit-andresrendon-web` → https://kit.andresrendon.com. Cada commit en `main` se publica en 1–2 minutos; las otras ramas generan una vista previa en `*.kit-andresrendon-web.pages.dev`.
+GitHub `urieln8n/kit-andresrendon` (rama `main`) → Cloudflare Pages, proyecto `kit-andresrendon-web` → https://kit.andresrendon.com. Cada commit en `main` se publica sola en 1–2 minutos; las otras ramas generan una vista previa en `*.kit-andresrendon-web.pages.dev`.
