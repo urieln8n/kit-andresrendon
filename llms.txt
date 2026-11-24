@@ -7,6 +7,7 @@
 - [5 plantillas de guion para Shorts](https://kit.andresrendon.com/recursos/plantillas-guion): formatos de 20 a 25 segundos, segundo a segundo. Descarga directa en PDF.
 - [12 prompts de imágenes verticales](https://kit.andresrendon.com/recursos/prompts-imagenes): escenas de neón 9:16 para generar con IA en tu propio PC. Descarga directa en PDF.
 - [Checklist para subir un Short a YouTube](https://kit.andresrendon.com/recursos/checklist-subida): 15 puntos antes y después de publicar. Descarga directa en PDF.
+- [De 0 a tu primer cliente con IA en 30 días](https://kit.andresrendon.com/recursos/empezar-con-ia): hoja de ruta de 4 semanas (aprende, monta, ofrece, cobra) para tres caminos: creador de contenido con IA, servicios con IA para negocios o crear herramientas con IA. Incluye un test en https://kit.andresrendon.com/#empezar para elegir camino.
 
 ## Las 6 reglas de los 2 primeros segundos
 1. Voz desde el segundo 0.
