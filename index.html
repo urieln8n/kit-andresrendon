@@ -285,6 +285,10 @@
     .test__res h3 em { font-style: normal; color: var(--m3d-acento); }
     .test__res ol { padding-left: 1.2rem; margin: .8rem 0 1rem; }
     .test__res li { margin-bottom: .45rem; }
+    .test__mail { margin: 1rem 0 0; padding: 1rem; border-radius: 1rem; border: 1px solid rgba(62,230,224,.45); background: rgba(14,11,26,.6); }
+    .test__mail h4 { margin: 0 0 .3rem; font: 700 1.05rem var(--m3d-fuente-titulos); }
+    .test__mail .fila2 { margin-top: .6rem; }
+    .test__mail .consentimiento { font-size: .82rem; margin: .5rem 0; }
     .test__otra { background: none; border: 0; color: var(--niebla); text-decoration: underline; cursor: pointer; font: inherit; margin-top: .6rem; }
     .diario { display: grid; grid-template-columns: repeat(2, 1fr); gap: .7rem; max-width: 34rem; margin-top: .8rem; }
     .diario div { background: rgba(23,19,42,.85); border: 1px solid var(--linea); border-radius: 1rem; padding: .9rem 1rem; }
@@ -468,7 +472,7 @@
       <h2 class="m3d-titulo m3d-reveal">Gánate la vida con IA, <em>paso a paso</em></h2>
       <p class="m3d-texto empezar-intro m3d-reveal">No te voy a prometer que te hagas rico. Te enseño lo que hago yo, con mis números reales: lo que me funciona, lo que no y las herramientas que uso. Empieza por descubrir qué camino encaja contigo.</p>
 
-      <div class="test m3d-tarjeta m3d-reveal" id="test-ia" aria-live="polite">
+      <div class="test m3d-tarjeta m3d-reveal" id="test-ia" aria-live="polite" data-brevo="https://7cbfe83b.sibforms.com/serve/MUIFACfThEZmjMOZekUlzoiStSDv-8d5UA84bRjga5c_UiMOipzS001goU_ds41GSMQqHhcVQm42v1CBBWzTBtzsgZpJLS5wiz-tqF6JvNLRUdS-BtvrKAcE9-o7GJvjqr3zRysNBKssnGI-DJKSZ0DVKBkoJCZxh0wuslPRzsBpCzH4teYMzCfQxRCHxOdx8ZbyOhajxugKyoPs1A==">
         <p class="m3d-etiqueta" style="margin:0 0 .8rem">Test gratis · 1 minuto</p>
         <div class="test__cuerpo"></div>
       </div>
@@ -962,9 +966,36 @@
           return;
         }
         const g = ['s', 'c', 'a'].sort((x, y) => pts[y] - pts[x])[0], r = R[g];
-        caja.innerHTML = '<div class="test__res"><p class="test__paso">Tu camino</p><h3>' + r.t + '</h3><p class="m3d-texto" style="margin:0">' + r.d + '</p><ol>' + r.p.map((x) => '<li>' + x + '</li>').join('') + '</ol><p class="promo__nota">' + ritmo[pts.t] + '</p><a class="m3d-boton" href="/recursos/empezar-con-ia#camino-' + g + '">Ver mi hoja de ruta</a><br><button class="test__otra" type="button">Repetir el test</button></div>';
+        caja.innerHTML = '<div class="test__res"><p class="test__paso">Tu camino</p><h3>' + r.t + '</h3><p class="m3d-texto" style="margin:0">' + r.d + '</p><ol>' + r.p.map((x) => '<li>' + x + '</li>').join('') + '</ol><p class="promo__nota">' + ritmo[pts.t] + '</p><a class="m3d-boton" href="/recursos/empezar-con-ia#camino-' + g + '">Ver mi hoja de ruta</a>'
+          + '<form class="test__mail" novalidate><h4>¿Te lo mando por email?</h4><p class="promo__nota" style="margin:0">Te envío tu camino y la hoja de ruta, y te aviso el primero cuando abra la comunidad y las mentorías.</p>'
+          + '<div class="fila2"><label class="campo">Tu nombre<input type="text" name="NOMBRE" autocomplete="given-name" required></label><label class="campo">Tu email<input type="email" name="EMAIL" autocomplete="email" required></label></div>'
+          + '<label class="consentimiento"><input type="checkbox" name="ok" value="1" required><span>Acepto recibir mi plan y emails de Andrés Rendón sobre IA y sus recursos. Puedo darme de baja cuando quiera. <a href="/privacidad">Privacidad</a>.</span></label>'
+          + '<input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">'
+          + '<button class="m3d-boton m3d-pulso" type="submit">Mándamelo</button><p class="aviso-form" role="status" aria-live="polite"></p></form>'
+          + '<button class="test__otra" type="button">Repetir el test</button></div>';
+        caja.dataset.camino = g;
         if (window.zaraz) try { zaraz.track('test_ia', { camino: g }); } catch (e) {}
       }
+      caja.addEventListener('submit', async (e) => {
+        const f = e.target.closest('.test__mail'); if (!f) return;
+        e.preventDefault();
+        if (f.email_address_check.value) return;
+        const aviso = f.querySelector('.aviso-form'), nombre = f.NOMBRE.value.trim(), email = f.EMAIL.value.trim();
+        if (!nombre) { aviso.textContent = 'Escribe tu nombre.'; f.NOMBRE.focus(); return; }
+        if (!email || !f.EMAIL.validity.valid) { aviso.textContent = 'Revisa tu email.'; f.EMAIL.focus(); return; }
+        if (!f.ok.checked) { aviso.textContent = 'Marca la casilla para poder mandártelo.'; return; }
+        const g = caja.dataset.camino || 's', btn = f.querySelector('button'); btn.disabled = true; aviso.textContent = 'Enviando…';
+        const datos = new FormData();
+        datos.append('EMAIL', email); datos.append('NOMBRE', nombre);
+        datos.append('NEGOCIO', 'Tu camino: ' + R[g].t.replace(/<[^>]+>/g, ''));
+        datos.append('WEB', 'https://kit.andresrendon.com/recursos/empezar-con-ia#camino-' + g);
+        datos.append('email_address_check', ''); datos.append('locale', 'es');
+        try {
+          await fetch(document.getElementById('test-ia').dataset.brevo, { method: 'POST', body: datos, mode: 'no-cors' });
+          f.innerHTML = '<p class="m3d-texto" style="margin:0"><strong>¡Hecho!</strong> Te lo acabo de mandar a tu correo. Si no lo ves en un par de minutos, mira en promociones o spam.</p>';
+          if (window.zaraz) try { zaraz.track('plan_ia_email', { camino: g }); } catch (err) {}
+        } catch (err) { aviso.textContent = 'No se ha podido enviar. Inténtalo otra vez.'; btn.disabled = false; }
+      });
       caja.addEventListener('click', (e) => {
         if (e.target.closest('.test__otra')) { i = 0; pts = { c: 0, s: 0, a: 0, t: 2 }; pinta(); return; }
         const b = e.target.closest('button[data-k]'); if (!b) return;
