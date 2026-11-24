@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /gracias
+Disallow: /emails/
+Disallow: /.importar/
+
+Sitemap: https://kit.andresrendon.com/sitemap.xml
