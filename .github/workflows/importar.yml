@@ -1,0 +1,19 @@
+name: Importar archivos de la web publicada (una vez)
+on:
+  push:
+    paths: ['.importar/**', '.github/workflows/importar.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install blake3
+      - run: python3 .importar/importar.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- . ':!.importar' ':!.github'
+          git diff --cached --quiet || (git commit -m "Importar recursos de la web publicada (fuentes, 3D, imágenes, emails)" && git push)

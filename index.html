@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recursos gratis para crear Shorts con IA | Andrés Rendón</title>
+  <meta name="description" content="Llévate gratis 50 ganchos para Shorts, las 6 reglas de los 2 primeros segundos y el checklist que uso antes de publicar.">
+  <meta name="theme-color" content="#0E0B1A">
+  <meta property="og:title" content="Recursos gratis para crear Shorts con IA">
+  <meta property="og:description" content="50 ganchos para que no deslicen tu Short en los 2 primeros segundos.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://kit.andresrendon.com/">
+  <meta property="og:url" content="https://kit.andresrendon.com/">
+  <meta property="og:image" content="https://kit.andresrendon.com/assets/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"Person","@id":"https://kit.andresrendon.com/#andres","name":"Andrés Rendón","url":"https://kit.andresrendon.com/","image":"https://kit.andresrendon.com/assets/andres.webp","jobTitle":"Creador de contenido","address":{"@type":"PostalAddress","addressLocality":"Barcelona","addressCountry":"ES"},"sameAs":["https://www.youtube.com/@VICECLIPSTUDIO"]},
+    {"@type":"WebSite","@id":"https://kit.andresrendon.com/#web","url":"https://kit.andresrendon.com/","name":"Kit de ganchos para Shorts","inLanguage":"es-ES","publisher":{"@id":"https://kit.andresrendon.com/#andres"}},
+    {"@type":"CreativeWork","name":"Kit de ganchos para Shorts","description":"50 ganchos para Shorts, las 6 reglas de los 2 primeros segundos y un checklist antes de publicar.","isAccessibleForFree":true,"author":{"@id":"https://kit.andresrendon.com/#andres"},"inLanguage":"es-ES"}
+  ]}
+  </script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="fonts/sg-700.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/build/three.module.js",
+      "three/addons/": "./vendor/three/addons/",
+      "gsap": "./vendor/gsap/index.js",
+      "gsap/ScrollTrigger": "./vendor/gsap/ScrollTrigger.js",
+      "lenis": "./vendor/lenis/lenis.mjs"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="motor-3d/motor3d.css">
+  <style>
+    @font-face { font-family: "Space Grotesk"; src: url(fonts/sg-700.woff2) format("woff2"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: "Inter"; src: url(fonts/inter-400.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Inter"; src: url(fonts/inter-600.woff2) format("woff2"); font-weight: 600; font-display: swap; }
+    :root {
+      --m3d-fondo: #0E0B1A;
+      --m3d-texto: #F4F1FA;
+      --m3d-acento: #FF4FA3;
+      --m3d-sobre-acento: #0E0B1A;
+      --m3d-fuente: "Inter", system-ui, sans-serif;
+      --m3d-fuente-titulos: "Space Grotesk", "Inter", system-ui, sans-serif;
+      --cian: #3EE6E0;
+      --niebla: #A8A0BF;
+      --linea: #2E2747;
+    }
+    /* Reglas de la casa: etiquetas sin mayúsculas espaciadas */
+    .m3d-etiqueta, .m3d-cifra small { text-transform: none; letter-spacing: 0; }
+    .m3d-etiqueta { font-size: .9rem; }
+    .m3d-titulo em { font-style: normal; color: var(--m3d-acento); }
+    .cian { color: var(--cian); }
+
+    /* Formulario de captura */
+    .captura { display: grid; gap: .8rem; margin-top: 1.6rem; max-width: 30rem; }
+    .captura label.campo { display: grid; gap: .35rem; font-size: .9rem; color: var(--niebla); }
+    .captura input[type=text], .captura input[type=email] {
+      font: inherit; color: var(--m3d-texto); background: rgba(23,19,42,.78); border: 1px solid var(--linea);
+      border-radius: .8rem; padding: .95rem 1rem; backdrop-filter: blur(8px);
+    }
+    .captura input:focus-visible { outline: 2px solid var(--m3d-acento); outline-offset: 2px; border-color: transparent; }
+    .captura .consentimiento { display: flex; gap: .7rem; align-items: flex-start; font-size: .85rem; line-height: 1.45; color: var(--niebla); }
+    .captura .consentimiento input { accent-color: var(--m3d-acento); width: 1.15rem; height: 1.15rem; margin-top: .15rem; flex: none; }
+    .captura .consentimiento a { color: var(--m3d-texto); }
+    .captura button { justify-self: start; border: 0; cursor: pointer; font: inherit; }
+    .captura button:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+    .aviso-form { font-size: .9rem; min-height: 1.4em; color: var(--cian); }
+    .captura textarea { font: inherit; color: var(--m3d-texto); background: rgba(23,19,42,.78); border: 1px solid var(--linea); border-radius: .8rem; padding: .95rem 1rem; resize: vertical; min-height: 5.5rem; }
+    .captura textarea:focus-visible { outline: 2px solid var(--m3d-acento); outline-offset: 2px; border-color: transparent; }
+    .captura .fila2 { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    @media (max-width: 640px) { .captura .fila2 { grid-template-columns: 1fr; } }
+    .captura .opcional { color: var(--niebla); font-weight: 400; font-size: .8rem; }
+    .oferta .captura { margin-top: .4rem; }
+    .regalo { margin: 1rem 0 1.2rem; padding: .9rem 1rem; border-radius: .9rem; border: 1px dashed rgba(62,230,224,.55); background: rgba(62,230,224,.06); font-size: .95rem; line-height: 1.5; }
+    .regalo b { color: var(--cian); }
+
+    /* Oferta de lanzamiento */
+    .promo-barra { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .35rem .6rem; margin: 0 0 1.2rem; padding: .55rem 1rem;
+      border-radius: 99rem; background: rgba(255,79,163,.14); border: 1px solid rgba(255,79,163,.6); color: var(--m3d-texto); text-decoration: none; font-size: .9rem; }
+    .promo-barra b { background: var(--m3d-acento); color: var(--m3d-sobre-acento); padding: .1rem .55rem; border-radius: 99rem; font-size: .78rem; }
+    .promo-barra:hover { border-color: var(--m3d-acento); }
+    .promo { position: relative; max-width: 30rem; margin-top: 1.4rem; background: rgba(20,16,38,.96) !important; border: 1px solid rgba(255,79,163,.65) !important; box-shadow: 0 0 40px rgba(255,79,163,.18); }
+    .promo-barra s { opacity: .7; }
+    @media (max-width: 640px) { .promo-barra { font-size: .82rem; padding: .45rem .85rem; margin-bottom: .9rem; } }
+    .promo__etq { display: inline-block; font-size: .78rem; font-weight: 700; padding: .3rem .75rem; border-radius: 99rem; background: var(--m3d-acento); color: var(--m3d-sobre-acento); }
+    .promo__precio { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem .9rem; margin: .9rem 0 .2rem; }
+    .promo__precio b { font: 700 clamp(2.8rem, 8vw, 3.6rem)/1 var(--m3d-fuente-titulos); color: var(--m3d-acento); letter-spacing: -.03em; }
+    .promo__precio s { color: var(--niebla); font-size: 1.3rem; }
+    .promo__nota { color: var(--niebla); font-size: .9rem; margin: 0 0 1rem; }
+    .promo__plazas { font-weight: 600; margin: .8rem 0 .4rem; }
+    .promo__plazas b { color: var(--m3d-acento); }
+    .promo__barra { height: .55rem; border-radius: 99rem; background: var(--linea); overflow: hidden; margin-bottom: 1rem; }
+    .promo__barra span { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--m3d-acento), var(--cian)); transition: width 1.2s ease; }
+    .promo ul { list-style: none; padding: 0; margin: 0 0 1.2rem; display: grid; gap: .5rem; }
+    .promo li { display: flex; gap: .6rem; line-height: 1.45; }
+    .promo li::before { content: "✓"; color: var(--cian); font-weight: 700; }
+    .promo .m3d-boton { display: flex; justify-content: center; text-align: center; }
+    .promo--agotada .promo__precio b { color: var(--m3d-texto); }
+    .opciones { border: 0; padding: 0; margin: 0 0 .4rem; display: grid; gap: .5rem; }
+    .opciones legend { font-size: .9rem; color: var(--niebla); margin-bottom: .4rem; }
+    .opciones label { display: flex; gap: .7rem; align-items: flex-start; padding: .8rem 1rem; border-radius: .8rem; border: 1px solid var(--linea); background: rgba(23,19,42,.78); cursor: pointer; line-height: 1.4; }
+    .opciones label:has(input:checked) { border-color: var(--m3d-acento); background: rgba(255,79,163,.1); }
+    .opciones input { accent-color: var(--m3d-acento); margin-top: .2rem; flex: none; }
+    .opciones small { display: block; color: var(--niebla); }
+
+    /* Librería */
+    .estado { display: inline-block; font-size: .78rem; font-weight: 600; padding: .25rem .65rem; border-radius: 99rem; margin-bottom: .6rem; }
+    .estado--ya { background: var(--m3d-acento); color: var(--m3d-sobre-acento); }
+    .estado--pronto { border: 1px solid var(--linea); color: var(--niebla); }
+
+    /* Oferta web 3D */
+    .oferta { margin-top: 1.4rem; max-width: 30rem; }
+    .oferta .m3d-precio { font-size: 2.4rem; }
+    .oferta ul { list-style: none; padding: 0; margin: 1rem 0 1.4rem; display: grid; gap: .55rem; }
+    .oferta li { display: flex; gap: .6rem; line-height: 1.45; }
+    .oferta li::before { content: ""; flex: none; width: .55rem; height: .55rem; margin-top: .5rem; border-radius: 50%; background: var(--cian); }
+
+    .m3d-pie a { color: inherit; }
+    .m3d-pie small { display: block; opacity: .6; margin-top: .6rem; line-height: 1.5; }
+
+    /* Menú de la cabecera */
+    .menu { display: flex; align-items: center; gap: 1.4rem; }
+    .menu a:not(.m3d-boton) { color: var(--m3d-texto); text-decoration: none; font-weight: 600; font-size: .95rem; opacity: .85; }
+    .menu a:not(.m3d-boton):hover { opacity: 1; color: var(--m3d-acento); }
+    @media (max-width: 640px) { .menu a:not(.m3d-boton) { display: none; } }
+
+    /* Quién soy */
+    .quien { display: grid; grid-template-columns: 11rem 1fr; gap: 1.6rem; align-items: center; margin: .6rem 0 1.4rem; }
+    .quien img { width: 100%; height: auto; aspect-ratio: 5 / 8; object-fit: cover; border-radius: 1.2rem; border: 2px solid var(--cian); box-shadow: 0 0 40px rgba(62,230,224,.25); }
+    .quien .m3d-titulo { margin-top: 0; font-size: clamp(2rem, 3.6vw, 3.2rem); }
+    @media (max-width: 640px) { .quien { grid-template-columns: 1fr; } .quien img { max-width: 12rem; } }
+
+    /* Tarjeta del canal */
+    .canal { position: relative; max-width: 30rem; padding: 2.2rem 2.2rem 1.8rem; border-radius: 1.2rem;
+      background: linear-gradient(160deg, rgba(23,19,42,.9), rgba(14,11,26,.75)); border: 1px solid var(--linea); backdrop-filter: blur(10px); }
+    .canal__esq { position: absolute; width: 1.1rem; height: 1.1rem; border-color: var(--niebla); border-style: solid; border-width: 0; opacity: .7; }
+    .canal__esq--1 { top: .8rem; left: .8rem; border-top-width: 2px; border-left-width: 2px; }
+    .canal__esq--2 { top: .8rem; right: .8rem; border-top-width: 2px; border-right-width: 2px; }
+    .canal__esq--3 { bottom: .8rem; left: .8rem; border-bottom-width: 2px; border-left-width: 2px; }
+    .canal__esq--4 { bottom: .8rem; right: .8rem; border-bottom-width: 2px; border-right-width: 2px; }
+    .canal__etiqueta { font-weight: 600; color: var(--niebla); margin: 0 0 .4rem; }
+    .canal__cifra { font-family: var(--m3d-fuente-titulos); font-weight: 700; font-size: clamp(3.4rem, 9vw, 5.2rem); line-height: 1; margin: 0; color: var(--m3d-acento); }
+    .canal__cifra small { font-size: 1.1rem; color: var(--m3d-texto); }
+    .canal__handle { font-size: 1.15rem; margin: .5rem 0 1.2rem; }
+    .canal__barra { height: .55rem; border-radius: 99rem; background: var(--linea); overflow: hidden; }
+    .canal__barra span { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--m3d-acento), var(--cian)); transition: width 1.6s cubic-bezier(.2,.8,.2,1); }
+    .canal__falta { margin: .7rem 0 1.4rem; color: var(--niebla); }
+    .canal__falta b { color: var(--m3d-texto); }
+    .canal__nota { margin: 1rem 0 0; font-size: .9rem; color: var(--niebla); }
+
+    /* Cuenta atrás */
+    .cuenta__titulo { margin: 0 0 .6rem; font-weight: 600; color: var(--niebla); }
+    .cuenta { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; margin-bottom: .4rem; }
+    .cuenta div { background: rgba(14,11,26,.7); border: 1px solid var(--linea); border-radius: .8rem; padding: .7rem .3rem; text-align: center; }
+    .cuenta b { display: block; font-family: var(--m3d-fuente-titulos); font-size: clamp(1.6rem, 4vw, 2.2rem); color: var(--m3d-acento); line-height: 1; font-variant-numeric: tabular-nums; }
+    .cuenta small { font-size: .78rem; color: var(--niebla); }
+
+    /* Botón fijo en móvil */
+    .cta-fija { display: none; }
+    @media (max-width: 640px) {
+      .cta-fija { display: block; position: fixed; left: 1rem; right: 1rem; bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 40;
+        text-align: center; padding: 1rem; border-radius: 99rem; font-weight: 600; text-decoration: none;
+        background: var(--m3d-acento); color: var(--m3d-sobre-acento); box-shadow: 0 10px 30px rgba(255,79,163,.35);
+        transform: translateY(160%); transition: transform .4s ease; }
+      .cta-fija.visible { transform: none; }
+    }
+
+    /* Aviso de suscripción */
+    .suscribe { position: fixed; right: 1.2rem; bottom: 1.2rem; z-index: 50; max-width: 22rem; display: flex; gap: .9rem; align-items: flex-start;
+      padding: 1.1rem 1.2rem; border-radius: 1.1rem; background: rgba(23,19,42,.96); border: 1px solid var(--linea);
+      box-shadow: 0 20px 50px rgba(0,0,0,.45); backdrop-filter: blur(10px); animation: entra .5s ease both; }
+    .suscribe[hidden] { display: none; }
+    .suscribe img { flex: none; border-radius: 50%; }
+    .suscribe__t { margin: 0; font-family: var(--m3d-fuente-titulos); font-weight: 700; font-size: 1.1rem; }
+    .suscribe__p { margin: .3rem 0 .8rem; font-size: .92rem; line-height: 1.45; color: var(--niebla); }
+    .suscribe__p b { color: var(--m3d-texto); }
+    .suscribe .m3d-boton { padding: .65rem 1.1rem; font-size: .92rem; }
+    .suscribe__x { position: absolute; top: .4rem; right: .6rem; background: none; border: 0; color: var(--niebla); font-size: 1.4rem; cursor: pointer; line-height: 1; padding: .2rem; }
+    @media (max-width: 640px) { .suscribe { left: .8rem; right: .8rem; bottom: 5.2rem; max-width: none; } }
+    /* Recursos (librería) */
+    .recursos { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 1rem; margin-top: 1.4rem; }
+    .recurso { display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+    .recurso__mini { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; text-decoration: none; color: var(--m3d-texto);
+      background: linear-gradient(135deg, rgba(255,79,163,.28), rgba(62,230,224,.16)); border-bottom: 1px solid var(--linea); }
+    .recurso__mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .recurso__mini img, .portada { transition: transform .5s ease; }
+    .recurso:hover .recurso__mini img, .recurso:hover .portada { transform: scale(1.04); }
+    /* Portadas dibujadas (se ven como una imagen 16:9) */
+    .recurso__mini { container-type: inline-size; }
+    .portada { position: absolute; inset: 0; overflow: hidden; --c: var(--m3d-acento);
+      background: radial-gradient(ellipse at 85% 10%, rgba(255,79,163,.38), transparent 55%), radial-gradient(ellipse at 5% 100%, rgba(62,230,224,.22), transparent 55%), var(--m3d-fondo); }
+    .portada--cian { --c: var(--cian); }
+    .portada__txt { position: absolute; left: 6.5cqw; top: 9cqw; width: 52cqw; display: flex; flex-direction: column; align-items: flex-start; }
+    .portada__etq { font: 700 2.4cqw var(--m3d-fuente); color: var(--m3d-fondo); background: var(--c); padding: .7cqw 1.6cqw; border-radius: 99px; text-transform: uppercase; letter-spacing: .06em; }
+    .portada__t { font: 700 8.4cqw/0.98 var(--m3d-fuente-titulos); letter-spacing: -.03em; color: var(--m3d-texto); margin-top: 3cqw; }
+    .portada__t em { font-style: normal; color: var(--c); }
+    .portada__tel { position: absolute; right: 7cqw; top: 6cqw; width: 26cqw; height: 46cqw; border-radius: 3.4cqw; padding: 3.4cqw 2.6cqw; transform: rotate(6deg);
+      background: linear-gradient(170deg, #241c45, #120e24); border: .25cqw solid var(--c); box-shadow: 0 0 5cqw color-mix(in srgb, var(--c) 45%, transparent); display: flex; flex-direction: column; gap: 1.3cqw; }
+    .portada__num { font: 700 12cqw/1 var(--m3d-fuente-titulos); color: var(--c); letter-spacing: -.05em; }
+    .portada__fila { font: 600 1.45cqw ui-monospace, Menlo, monospace; white-space: nowrap; overflow: hidden; padding: 1cqw 1.2cqw; border-radius: 1cqw; background: rgba(14,11,26,.75); border: 1px solid var(--linea); color: var(--m3d-texto); }
+    .portada__gratis { position: absolute; right: 4.5cqw; bottom: 5cqw; font: 700 2.2cqw var(--m3d-fuente-titulos); color: var(--m3d-fondo); background: var(--m3d-texto); padding: 1cqw 2cqw; border-radius: 99px; transform: rotate(-4deg); }
+    .recurso__mini b { font-family: var(--m3d-fuente-titulos); font-size: 1.25rem; padding: 1rem; text-align: center; }
+    .recurso__play { position: absolute; width: 3rem; height: 3rem; border-radius: 50%; background: rgba(14,11,26,.7); border: 2px solid rgba(244,241,250,.5); }
+    .recurso__play::after { content: ""; position: absolute; left: 1.15rem; top: .85rem; border-left: .9rem solid #fff; border-top: .6rem solid transparent; border-bottom: .6rem solid transparent; }
+    .recurso .estado { position: absolute; top: auto; bottom: .7rem; left: .7rem; margin: 0; z-index: 1; }
+    .m3d-tarjeta.recurso { background: rgba(20,16,38,.96); }
+    .recurso__cuerpo { display: flex; flex-direction: column; gap: .4rem; padding: 1rem 1.1rem 1.2rem; flex: 1; }
+    .recurso__cuerpo h3 { margin: 0; }
+    .recurso__cuerpo p { margin: 0; flex: 1; color: var(--niebla); }
+    .recurso__botones { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
+    .recurso__botones .m3d-boton { padding: .6rem 1rem; font-size: .9rem; }
+    .recurso__botones .apagado { opacity: .55; pointer-events: none; }
+
+    /* Suscriptores en la portada */
+    .en-vivo { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.2rem; font-size: .95rem; color: var(--niebla); text-decoration: none; }
+    .en-vivo b { color: var(--m3d-texto); }
+    .en-vivo i { width: .55rem; height: .55rem; border-radius: 50%; background: #ff2d55; box-shadow: 0 0 0 0 rgba(255,45,85,.6); animation: late 1.8s infinite; }
+    .en-vivo:hover b { color: var(--m3d-acento); }
+    @keyframes late { 70% { box-shadow: 0 0 0 .5rem rgba(255,45,85,0); } 100% { box-shadow: 0 0 0 0 rgba(255,45,85,0); } }
+
+    /* Dudas frecuentes */
+    .dudas { display: grid; gap: .6rem; max-width: 34rem; margin-top: 1.2rem; }
+    .dudas details { background: rgba(23,19,42,.82); border: 1px solid var(--linea); border-radius: 1rem; padding: 1rem 1.2rem; backdrop-filter: blur(8px); }
+    .dudas summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+    .dudas summary::-webkit-details-marker { display: none; }
+    .dudas summary::after { content: "+"; color: var(--m3d-acento); font-size: 1.3rem; line-height: 1; }
+    .dudas details[open] summary::after { content: "–"; }
+    .dudas details[open] { border-color: rgba(255,79,163,.5); }
+    .dudas p { margin: .7rem 0 0; color: var(--niebla); line-height: 1.55; }
+
+    /* Autor en la portada (cara + nombre, como en las webs de creadores) */
+    .autor { display: inline-flex; align-items: center; gap: .8rem; margin-bottom: 1.1rem; text-decoration: none; color: var(--m3d-texto); text-align: left; }
+    .autor img { width: 3.4rem; height: 3.4rem; border-radius: 50%; object-fit: cover; object-position: 50% 18%; border: 2px solid var(--m3d-acento); box-shadow: 0 0 24px rgba(255,79,163,.45); }
+    .autor b { display: block; font-size: 1.05rem; }
+    .autor small { color: var(--niebla); font-size: .85rem; }
+    .en-vivo__barra { display: inline-block; width: 4.5rem; height: .35rem; border-radius: 99rem; background: var(--linea); overflow: hidden; vertical-align: middle; margin: 0 .2rem; }
+    .en-vivo__barra span { display: block; height: 100%; width: 2%; background: linear-gradient(90deg, var(--m3d-acento), var(--cian)); border-radius: inherit; transition: width 1.4s ease; }
+    .menu .menu__yt { padding: .55rem 1rem; font-size: .9rem; }
+    @media (max-width: 380px) { .menu .menu__yt { padding: .5rem .8rem; } }
+
+    /* Datos del canal y último Short */
+    .canal__extra { margin: -.6rem 0 1.2rem; color: var(--niebla); font-size: .95rem; }
+    .canal__extra b { color: var(--m3d-texto); }
+    .ultimo { display: grid; grid-template-columns: 7rem 1fr; gap: 1.2rem; align-items: center; max-width: 30rem; margin-top: 1rem; padding: 1.1rem;
+      border-radius: 1.2rem; background: rgba(20,16,38,.94); border: 1px solid var(--linea); }
+    .ultimo[hidden] { display: none; }
+    .ultimo__mini { position: relative; display: grid; place-items: center; aspect-ratio: 9 / 16; border-radius: .8rem; overflow: hidden; background: #000; }
+    .ultimo__mini img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .ultimo__t { margin: .2rem 0 .4rem; font-size: 1.02rem; line-height: 1.3; }
+    .ultimo__v { margin: 0 0 .8rem; color: var(--niebla); font-size: .92rem; }
+    .ultimo__v b { color: var(--m3d-acento); }
+    .ultimo .m3d-boton { padding: .6rem 1rem; font-size: .9rem; }
+    .shorts { max-width: 30rem; margin-top: 1rem; padding: 1.1rem; border-radius: 1.2rem; background: rgba(20,16,38,.94); border: 1px solid var(--linea); }
+    .shorts[hidden] { display: none; }
+    .shorts__rejilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin: .7rem 0 1rem; }
+    .short { position: relative; display: block; aspect-ratio: 9 / 16; border-radius: .7rem; overflow: hidden; background: #000; text-decoration: none; color: var(--m3d-texto); }
+    .short img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .short:hover img { transform: scale(1.05); }
+    .short span { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.8rem .5rem .45rem; font-size: .78rem; font-weight: 600; background: linear-gradient(transparent, rgba(0,0,0,.88)); }
+    .shorts .m3d-boton { padding: .6rem 1rem; font-size: .9rem; }
+
+    /* Ventana antes de descargar */
+    .descarga { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 1.2rem; background: rgba(6,4,14,.72); backdrop-filter: blur(6px); }
+    .descarga[hidden] { display: none; }
+    .descarga__caja { position: relative; max-width: 25rem; width: 100%; text-align: center; padding: 2rem 1.6rem 1.6rem; border-radius: 1.2rem;
+      background: rgba(23,19,42,.98); border: 1px solid var(--linea); box-shadow: 0 30px 70px rgba(0,0,0,.5); animation: entra .35s ease both; }
+    .descarga__caja h3 { margin: .2rem 0 .5rem; font-family: var(--m3d-fuente-titulos); font-size: 1.45rem; }
+    .descarga__caja p { margin: 0 0 1.2rem; color: var(--niebla); line-height: 1.5; }
+    .descarga__caja .m3d-boton { display: flex; justify-content: center; width: 100%; box-sizing: border-box; margin-top: .6rem; }
+    .descarga__x { position: absolute; top: .5rem; right: .7rem; background: none; border: 0; color: var(--niebla); font-size: 1.5rem; cursor: pointer; }
+
+    @keyframes entra { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .suscribe { animation: none; } .cta-fija { transition: none; } }
+  </style>
+</head>
+<body>
+
+  <div class="m3d-intro" aria-hidden="true"><img src="assets/logo-plano.svg" alt=""></div>
+
+  <header class="m3d-cabecera">
+    <a class="m3d-cabecera__marca" href="#inicio">
+      <img src="assets/logo-plano.svg" alt="">
+      <span>Andrés Rendón</span>
+    </a>
+    <nav class="menu">
+      <a href="#libreria">Recursos</a>
+      <a href="#quien">Quién soy</a>
+      <a class="m3d-boton m3d-boton--fantasma menu__yt" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" target="_blank" rel="noopener">▶ Suscribirme</a>
+      <a class="m3d-boton" href="#kit">Kit gratis</a>
+    </nav>
+  </header>
+
+  <canvas id="escena3d"></canvas>
+
+  <main data-motor3d
+        data-modelo="assets/telefono.js"
+        data-acento="#FF4FA3"
+        data-fondo="#0E0B1A"
+        data-giro="vaiven"
+        data-objetos='[
+          {"id":"logo","tipo":"logo","src":"assets/logo.svg","grosor":0.14},
+          {"id":"rosa","tipo":"copia","de":"estrella","color":"#FF4FA3"},
+          {"id":"cian","tipo":"copia","de":"estrella","color":"#3EE6E0"},
+          {"id":"ambiente","tipo":"particulas","cantidad":120,"tamano":0.07}
+        ]'>
+
+    <!-- 1 · Apertura -->
+    <section id="inicio" class="m3d-seccion m3d-seccion--centro m3d-seccion--hero"
+             data-3d='{"rot":[0,0,0],"pos":[0,0.95,0],"escala":0.62,"cam":[0,0,6.6],"mira":[0,0,0],"luz":1.1,
+                       "objetos":{"ambiente":{"opacidad":0.6}}}'>
+      <div class="m3d-hero-entra">
+        <a class="promo-barra" href="#promo"><b>Lanzamiento</b> Web 3D por 99,99 € <s>799 €</s> · quedan <strong class="plazas-libres">10</strong> plazas →</a><br>
+        <a class="autor" href="#quien"><img src="assets/andres.webp" alt="Andrés Rendón" width="56" height="56"><span><b>Andrés Rendón</b><small>Shorts con IA · @VICECLIPSTUDIO</small></span></a><br>
+        <span class="m3d-etiqueta">Recursos gratis para creadores</span>
+        <h1 class="m3d-titulo m3d-titulo--xl m3d-split">Que no deslicen tu Short</h1>
+        <p class="m3d-texto m3d-texto--grande">Kits, plantillas y prompts gratis para crear Shorts con IA. Empieza por los 50 ganchos que uso para que no deslicen en los 2 primeros segundos.</p>
+        <div class="m3d-botones">
+          <a class="m3d-boton m3d-pulso" href="#kit">Quiero el kit gratis</a>
+          <a class="m3d-boton m3d-boton--fantasma" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" target="_blank" rel="noopener">▶ Suscribirme gratis</a>
+        </div>
+      </div>
+      <a class="en-vivo" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" target="_blank" rel="noopener"><i></i><span><b class="subs-vivo">17</b> creadores ya están dentro <span class="en-vivo__barra"><span></span></span> faltan <b class="subs-faltan">983</b> para 1.000</span></a>
+      <div class="m3d-pista">Desliza</div>
+    </section>
+
+    <!-- 2 · Librería -->
+    <section id="libreria" class="m3d-seccion m3d-seccion--der"
+             data-3d='{"rot":[0,34,0],"pos":[-2.05,0,0],"escala":0.8,"cam":[0,0,6],"mira":[0,0,0],"luz":1,
+                       "objetos":{"rosa":{"pos":[-1.3,0,0.1],"rot":[0,22,0],"escala":0.8,"opacidad":1},
+                                  "cian":{"pos":[-0.55,0,0.2],"rot":[0,10,0],"escala":0.8,"opacidad":1}}}'>
+      <span class="m3d-etiqueta m3d-reveal">La librería · 100 % gratis</span>
+      <h2 class="m3d-titulo m3d-reveal">Todo lo que <em>entrego</em>, en un solo sitio</h2>
+      <p class="m3d-texto m3d-reveal">Kits, plantillas y prompts listos para descargar. Sin registrarte, salvo el kit de ganchos, que te lo mando al correo. Subo uno nuevo cada semana.</p>
+      <div class="recursos" id="recursos"></div>
+      <p class="m3d-reveal" style="margin-top:1.2rem"><a class="m3d-boton m3d-boton--fantasma" href="https://drive.google.com/drive/folders/12bUxuVtt8r5cd_lZyuoQgZyQdBaNw33R" target="_blank" rel="noopener">Abrir la carpeta en Google Drive ↗</a></p>
+    </section>
+
+    <!-- 3 · El canal -->
+    <section id="canal" class="m3d-seccion m3d-seccion--izq"
+             data-3d='{"rot":[0,-22,0],"pos":[1.3,0,0],"escala":1,"cam":[0,0,6],
+                       "objetos":{"logo":{"pos":[2.6,1.4,-1.2],"rot":[0,-24,0],"escala":0.34,"opacidad":1}}}'>
+      <div class="canal m3d-reveal" data-suscriptores="17" data-meta="1000">
+        <span class="canal__esq canal__esq--1"></span><span class="canal__esq canal__esq--2"></span>
+        <span class="canal__esq canal__esq--3"></span><span class="canal__esq canal__esq--4"></span>
+        <p class="canal__etiqueta">En YouTube · La tribu VICECLIP</p>
+        <p class="canal__cifra"><span class="canal__num">17</span> <small>suscriptores</small></p>
+        <p class="canal__handle">@VICECLIPSTUDIO</p>
+        <p class="canal__extra"><b class="canal__vistas">5.165</b> visualizaciones · <b class="canal__videos">10</b> Shorts</p>
+        <div class="canal__barra" role="progressbar" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="17"><span></span></div>
+        <p class="canal__falta">Faltan <b class="canal__resto">983</b> para 1.000</p>
+        <a class="m3d-boton" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" rel="noopener">Suscribirme →</a>
+        <p class="canal__nota">Activa la campana o te pierdes la web 3D del domingo y los recursos nuevos.</p>
+      </div>
+      <div class="ultimo" id="ultimo" hidden>
+        <a class="ultimo__mini" href="https://www.youtube.com/@VICECLIPSTUDIO/shorts" target="_blank" rel="noopener" aria-label="Ver el último Short"><img alt="" loading="lazy"><span class="recurso__play"></span></a>
+        <div>
+          <p class="canal__etiqueta">Lo último que he subido</p>
+          <h3 class="ultimo__t"></h3>
+          <p class="ultimo__v"></p>
+          <a class="m3d-boton m3d-boton--fantasma ultimo__ver" href="https://www.youtube.com/@VICECLIPSTUDIO/shorts" target="_blank" rel="noopener">Verlo en YouTube</a>
+        </div>
+      </div>
+      <div class="shorts" id="shorts" hidden>
+        <p class="canal__etiqueta">Más Shorts del canal</p>
+        <div class="shorts__rejilla"></div>
+        <a class="m3d-boton m3d-boton--fantasma" href="https://www.youtube.com/@VICECLIPSTUDIO/shorts" target="_blank" rel="noopener">Ver todos los Shorts ↗</a>
+      </div>
+    </section>
+
+    <!-- 4 · Qué incluye el kit -->
+    <section id="incluye" class="m3d-seccion m3d-seccion--izq"
+             data-3d='{"rot":[0,-25,0],"pos":[1.35,0,0],"escala":1,"cam":[0,0.1,6],
+                       "objetos":{"ambiente":{"opacidad":0.35}}}'>
+      <span class="m3d-etiqueta m3d-reveal">Qué incluye</span>
+      <h2 class="m3d-titulo m3d-reveal">11 páginas para <em>dejar de perder visitas</em> al empezar</h2>
+      <ol class="m3d-puntos">
+        <li class="m3d-reveal"><strong>50 ganchos</strong><span>En 5 tipos: advertencia, pregunta, curiosidad, lista y resultado. Cada uno con un ejemplo.</span></li>
+        <li class="m3d-reveal"><strong>Las 6 reglas de los 2 segundos</strong><span>Voz en el segundo 0, texto desde el primer fotograma, primer corte antes de 1,5 s…</span></li>
+        <li class="m3d-reveal"><strong>Un Short por dentro</strong><span>Segundo a segundo, cómo está montado uno de mis vídeos.</span></li>
+        <li class="m3d-reveal"><strong>Checklist antes de publicar</strong><span>10 puntos para repasar con cada vídeo.</span></li>
+      </ol>
+    </section>
+
+    <!-- 5 · Formulario -->
+    <section id="kit" class="m3d-seccion m3d-seccion--izq"
+             data-3d='{"rot":[-6,-18,0],"pos":[1.1,0.1,0],"escala":1.15,"cam":[0,0.2,5.2],"mira":[0.4,0.1,0],"luz":1.4,
+                       "objetos":{"logo":{"opacidad":0}}}'>
+      <span class="m3d-etiqueta m3d-reveal">Gratis</span>
+      <h2 class="m3d-titulo m3d-reveal">Te lo mando <em>a tu correo</em></h2>
+      <p class="m3d-texto m3d-reveal">Déjame tu email, confirma con un clic y te llevo al PDF. Después te escribo cuando haya kits nuevos o directo. Puedes darte de baja cuando quieras.</p>
+      <form class="captura m3d-reveal" id="captura" data-brevo="https://7cbfe83b.sibforms.com/serve/MUIFAM4IFffA6DqR91ixbBiWHDXoeQ0whPy9Nsq_z58gorwLTW9PQiY6LzUp0vPT9t7LHjHeWhFHpjtygW_5OBHG0UN8IxOvStxSTRwKsXmQ1IM9avdzBsRMpcXVA5m5RJbHYKIVp7IvDImO6tfb6EhHHcK-1nxC-bQyT3gvorGriDpYOh-rNbe3ovPNGI0j98pY1Wj7deTfc509JQ==" novalidate>
+        <label class="campo">Tu email
+          <input type="email" name="EMAIL" autocomplete="email" required>
+        </label>
+        <label class="consentimiento">
+          <input type="checkbox" id="consentimiento" value="1" required>
+          <span>Acepto recibir el kit y emails de Andrés Rendón sobre creación de contenido. He leído la <a href="privacidad.html">política de privacidad</a>.</span>
+        </label>
+        <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+        <input type="hidden" name="locale" value="es">
+        <input type="hidden" name="html_type" value="simple">
+        <button class="m3d-boton m3d-pulso" type="submit">Enviarme el kit</button>
+        <p class="aviso-form" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- 6 · Quién soy -->
+    <section id="quien" class="m3d-seccion m3d-seccion--der"
+             data-3d='{"rot":[6,28,-4],"pos":[-1.25,-0.1,0],"escala":0.95,"cam":[0,0,6],
+                       "objetos":{"logo":{"pos":[-2.75,1.45,-1.4],"rot":[0,24,0],"escala":0.34,"opacidad":1}}}'>
+      <span class="m3d-etiqueta m3d-reveal">Quién soy</span>
+      <div class="quien m3d-reveal">
+        <img src="assets/andres.webp" alt="Andrés Rendón" width="500" height="800" loading="lazy">
+        <div>
+          <h2 class="m3d-titulo">Hola, soy <em>Andrés</em></h2>
+          <p class="m3d-texto">Emprendedor en Barcelona. Me apasionan la IA, el vídeo y el software, y monto mis proyectos en mi propio PC.</p>
+          <p class="m3d-texto">Empecé un canal de GTA 6 que hace Shorts casi en automático. Al principio la gente deslizaba nada más empezar, y este kit es lo que cambié. Aquí te comparto todo lo que me funciona.</p>
+        </div>
+      </div>
+      <div class="m3d-cifras m3d-reveal">
+        <div class="m3d-cifra"><span class="m3d-contador" data-valor="3.400">0</span><small>visualizaciones en los 3 primeros días</small></div>
+        <div class="m3d-cifra"><span class="m3d-contador" data-valor="52" data-sufijo=" %">0</span><small>del vídeo visto de media</small></div>
+      </div>
+    </section>
+
+    <!-- 7 · El siguiente paso: webs 3D -->
+    <section id="webs" class="m3d-seccion m3d-seccion--izq"
+             data-3d='{"rot":[0,-30,0],"pos":[1.35,-0.15,0],"escala":0.9,"cam":[0,0,6],
+                       "objetos":{"rosa":{"opacidad":0},"cian":{"opacidad":0},
+                                  "logo":{"pos":[2.75,1.5,-1.4],"rot":[0,-30,0],"escala":0.36,"opacidad":1}}}'>
+      <span class="m3d-etiqueta m3d-reveal">El siguiente paso</span>
+      <h2 class="m3d-titulo m3d-reveal">Tu web 3D, <em>por 99,99 €</em> o gratis</h2>
+      <p class="m3d-texto m3d-reveal">Una página como esta, con tu producto en 3D, tus textos, tus fotos y tus colores. Resérvala ahora a precio de lanzamiento o apúntate a la que regalo cada domingo.</p>
+      <div class="promo m3d-tarjeta m3d-reveal" id="promo" data-total="10" data-libres="10">
+        <span class="promo__etq">Precio de lanzamiento · solo 10 plazas</span>
+        <p class="promo__precio"><b>99,99 €</b> <s>799 €</s></p>
+        <p class="promo__nota">Precio para las 10 primeras webs. Cuando se acaben las plazas, vuelve a su precio normal: 799 €.</p>
+        <p class="promo__plazas">Quedan <b class="plazas-libres">10</b> de <span class="plazas-total">10</span> plazas</p>
+        <div class="promo__barra" role="progressbar" aria-valuemin="0" aria-valuemax="10" aria-valuenow="10"><span></span></div>
+        <ul>
+          <li>Landing de una página con efecto 3D, como esta</li>
+          <li>Tus textos, tus fotos y tus colores</li>
+          <li>Botón de WhatsApp para que te escriban directamente</li>
+          <li>Publicada y lista: en tu dominio o en un subdominio mío</li>
+          <li>Entrega en 7 días desde que me mandas tus textos y fotos</li>
+          <li>Una ronda de cambios incluida</li>
+        </ul>
+        <a class="m3d-boton m3d-pulso promo__cta" href="#web3d" data-tipo="oferta">Reservar por 99,99 €</a>
+      </div>
+      <div class="oferta m3d-tarjeta m3d-reveal">
+        <p class="m3d-etiqueta" style="margin:0 0 .6rem">O gratis: cada domingo regalo una web</p>
+        <p class="cuenta__titulo">Elijo el próximo negocio en</p>
+        <div class="cuenta" id="cuenta" aria-live="off">
+          <div><b data-u="d">0</b><small>días</small></div>
+          <div><b data-u="h">0</b><small>horas</small></div>
+          <div><b data-u="m">0</b><small>min</small></div>
+          <div><b data-u="s">0</b><small>seg</small></div>
+        </div>
+        <ul>
+          <li>Gratis. A cambio, me dejas grabar el proceso y me das tu opinión.</li>
+          <li>Te enseño la web antes de publicarla.</li>
+          <li>Elijo los domingos a las 20:00 el caso que más pueda mejorar.</li>
+        </ul>
+        <p class="regalo"><b>Para todos los que se apuntan:</b> un mini diagnóstico gratis de tu web o tu Instagram con las 5 cosas que más clientes te están costando. Te lo mando a tu correo esta semana.</p>
+      </div>
+      <div class="oferta m3d-tarjeta m3d-reveal">
+        <form class="captura" id="web3d" data-brevo="https://7cbfe83b.sibforms.com/serve/MUIFAOL9ysff7MKfXc7W7XqENhGawyuxrK-u6WH8SY4WlHzE0MA81bfJT7ljqAiBcY99HqLOc4BWlOq320kt4jb_8HoVzBX7SQfXfkshQGKpJ5sOJI-fSPE77nsJsA8XdBfcNX0gZzSwna3VeVgkzfabHlHSFYrSMLLFZ71wStWDbv_fckpZ-8d85SpKH1mdH23XhuVDiCN_shZ7zA==" novalidate>
+          <fieldset class="opciones">
+            <legend>¿Qué quieres?</legend>
+            <label><input type="radio" name="tipo" value="oferta" checked><span><b class="opcion-oferta">Reservar mi web por 99,99 €</b><small>Te escribo en menos de 48 h con el pago y los siguientes pasos.</small></span></label>
+            <label><input type="radio" name="tipo" value="gratis"><span><b>Participar en la web gratis del domingo</b><small>Y recibir el mini diagnóstico gratis de tu web.</small></span></label>
+          </fieldset>
+          <div class="fila2">
+            <label class="campo">Tu nombre
+              <input type="text" name="NOMBRE" autocomplete="given-name" required>
+            </label>
+            <label class="campo">Tu email
+              <input type="email" name="EMAIL" autocomplete="email" required>
+            </label>
+          </div>
+          <div class="fila2">
+            <label class="campo">Nombre del negocio
+              <input type="text" name="n" autocomplete="organization" required>
+            </label>
+            <label class="campo">Ciudad
+              <input type="text" name="c" autocomplete="address-level2" required>
+            </label>
+          </div>
+          <label class="campo">¿A qué se dedica?
+            <input type="text" name="s" placeholder="Barbería, restaurante, taller, tienda…" required>
+          </label>
+          <label class="campo">Tu web o Instagram <span class="opcional">(si no tienes, déjalo vacío)</span>
+            <input type="text" name="WEB" placeholder="https://… o @tunegocio">
+          </label>
+          <label class="campo">¿Qué te gustaría conseguir con la web? <span class="opcional">(opcional)</span>
+            <textarea name="x" maxlength="300" placeholder="Más reservas, que te encuentren en Google, vender online…"></textarea>
+          </label>
+          <label class="consentimiento">
+            <input type="checkbox" id="consentimiento-web" value="1" required>
+            <span>Acepto que Andrés Rendón use estos datos para gestionar mi reserva o valorar mi negocio para la web gratis, contactarme sobre ello y enviarme el mini diagnóstico. He leído la <a href="privacidad.html">política de privacidad</a>.</span>
+          </label>
+          <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+          <button class="m3d-boton m3d-pulso" type="submit">Reservar por 99,99 €</button>
+          <p class="aviso-form" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- 8 · Dudas frecuentes -->
+    <section id="dudas" class="m3d-seccion m3d-seccion--der"
+             data-3d='{"rot":[0,30,0],"pos":[-1.5,0,0],"escala":0.85,"cam":[0,0,6],
+                       "objetos":{"logo":{"opacidad":0},"rosa":{"opacidad":0},"cian":{"opacidad":0},"ambiente":{"opacidad":0.4}}}'>
+      <span class="m3d-etiqueta m3d-reveal">Dudas</span>
+      <h2 class="m3d-titulo m3d-reveal">Dudas <em>frecuentes</em></h2>
+      <div class="dudas m3d-reveal">
+        <details><summary>¿De verdad es todo gratis?</summary><p>Sí. Los recursos son gratis. Solo te pido que, si te sirven, te suscribas al canal: es lo que me permite seguir haciéndolos.</p></details>
+        <details><summary>¿Por qué el kit de ganchos pide mi email?</summary><p>Porque te lo mando al correo y así te aviso cuando subo un recurso nuevo o hago un directo. Puedes darte de baja con un clic.</p></details>
+        <details><summary>¿Necesito saber editar o programar?</summary><p>No. Las plantillas están pensadas para rellenar lo que va entre corchetes, grabar la voz y montar.</p></details>
+        <details><summary>¿Los prompts funcionan con cualquier programa?</summary><p>Están escritos para generar imágenes en tu propio PC, pero sirven en casi cualquier generador de imágenes con IA. Escríbelos en inglés.</p></details>
+        <details><summary>¿Qué incluye la web 3D de 99,99 €?</summary><p>Una landing de una página con efecto 3D como esta, con tus textos, fotos y colores, botón de WhatsApp, publicada en tu dominio o en un subdominio mío, entregada en 7 días desde que me mandas el material y con una ronda de cambios.</p></details>
+        <details><summary>¿Por qué cuesta tan poco?</summary><p>Es el precio de lanzamiento para mis 10 primeros clientes: quiero casos reales que enseñar. Cuando se acaben las 10 plazas, la misma web cuesta 799 €.</p></details>
+        <details><summary>¿Cómo pago?</summary><p>Rellenas el formulario y en menos de 48 horas te escribo con el enlace de pago y los siguientes pasos. No pagas nada hasta entonces.</p></details>
+        <details><summary>¿Cómo consigo la web 3D gratis?</summary><p>Rellena el formulario de «El siguiente paso», marca «Participar en la web gratis del domingo» y pon los datos de tu negocio. Cada domingo a las 20:00 elijo el caso que más pueda mejorar. No hace falta estar suscrito; si lo estás, te enterarás antes de cada elección.</p></details>
+        <details><summary>¿Y si no me eligen?</summary><p>Te mando igualmente a tu correo un mini diagnóstico gratis de tu web o tu Instagram: las 5 cosas que más clientes te están costando y cómo arreglarlas.</p></details>
+      </div>
+    </section>
+
+    <!-- 9 · Cierre -->
+    <section id="cierre" class="m3d-seccion m3d-seccion--centro m3d-seccion--abajo"
+             data-3d='{"rot":[0,0,0],"pos":[0,1.2,0],"escala":0.42,"opacidad":0,"cam":[0,0,6.4],
+                       "objetos":{"logo":{"pos":[0,1.3,0],"rot":[0,0,0],"escala":0.46,"opacidad":1},"ambiente":{"opacidad":0.6}}}'>
+      <span class="m3d-etiqueta m3d-reveal">Sígueme</span>
+      <h2 class="m3d-titulo m3d-reveal">Cada semana, <span class="cian">un truco nuevo</span></h2>
+      <p class="m3d-texto m3d-reveal">En VICECLIP STUDIO te enseño a montar Shorts paso a paso, con voz y pantalla.</p>
+      <div class="m3d-botones m3d-reveal">
+        <a class="m3d-boton" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" rel="noopener">Suscríbete en YouTube</a>
+        <a class="m3d-boton m3d-boton--fantasma" href="#kit">Quiero el kit</a>
+      </div>
+    </section>
+  </main>
+
+  <a class="cta-fija" href="#promo">Web 3D por 99,99 € · quedan <span class="plazas-libres">10</span> plazas</a>
+
+  <div class="descarga" id="descarga" hidden role="dialog" aria-modal="true" aria-labelledby="descarga-t">
+    <div class="descarga__caja">
+      <button class="descarga__x" type="button" aria-label="Cerrar">×</button>
+      <span class="m3d-etiqueta">Antes de descargar</span>
+      <h3 id="descarga-t">¿Me ayudas con un clic?</h3>
+      <p class="descarga__p">Este recurso es gratis. Si te sirve, suscríbete al canal: es lo que me permite seguir haciéndolos.</p>
+      <a class="m3d-boton descarga__sub" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" target="_blank" rel="noopener">Suscribirme y descargar</a>
+      <a class="m3d-boton m3d-boton--fantasma descarga__ir" href="#" target="_blank" rel="noopener">Ya estoy suscrito, descargar</a>
+    </div>
+  </div>
+
+  <aside class="suscribe" id="suscribe" hidden aria-label="Suscríbete al canal">
+    <button class="suscribe__x" type="button" aria-label="Cerrar">×</button>
+    <img src="assets/logo-plano.svg" alt="" width="44" height="44">
+    <div>
+      <p class="suscribe__t">¿Te está sirviendo?</p>
+      <p class="suscribe__p">Cada semana subo un truco nuevo en <b>VICECLIP STUDIO</b>. Únete a los <span class="suscribe__n">10</span> que ya están.</p>
+      <a class="m3d-boton" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" rel="noopener">Suscribirme gratis</a>
+    </div>
+  </aside>
+
+  <footer class="m3d-pie">
+    <nav>
+      <a href="#kit">Kit gratis</a>
+      <a href="#quien">Quién soy</a>
+      <a href="#libreria">Librería</a>
+      <a href="#webs">Webs 3D</a>
+      <a href="#dudas">Dudas</a>
+      <a href="privacidad.html">Privacidad</a>
+    </nav>
+    <div>Andrés Rendón, VICECLIP STUDIO. <a href="mailto:hola@andresrendon.com">hola@andresrendon.com</a>
+      <small>GTA 6 es una marca de Rockstar Games y Take-Two. Esta web no está afiliada a ellas.</small></div>
+  </footer>
+
+  <script>
+    // Formulario: se conecta a Brevo poniendo en data-brevo la URL de "action" del formulario de Brevo.
+    (function () {
+      const f = document.getElementById('captura'); if (!f) return;
+      const aviso = f.querySelector('.aviso-form');
+      f.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (f.email_address_check.value) return;
+        if (!f.EMAIL.validity.valid || !f.EMAIL.value) { aviso.textContent = 'Revisa tu email.'; f.EMAIL.focus(); return; }
+        if (!f.querySelector('#consentimiento').checked) { aviso.textContent = 'Marca la casilla para poder enviarte el kit.'; return; }
+        const btn = f.querySelector('button'); btn.disabled = true; aviso.textContent = 'Enviando…';
+        const datos = new FormData(f);
+        try {
+          await fetch(f.dataset.brevo, { method: 'POST', body: datos, mode: 'no-cors' });
+          f.innerHTML = '<p class="m3d-texto" style="font-size:1.15rem"><strong>¡Casi está!</strong> Te acabo de mandar un email. Pulsa el botón de confirmar y te llevo directo al kit. Si no lo ves en un par de minutos, mira en promociones o spam.</p><p class="m3d-texto">Mientras llega, únete al canal: cada semana subo un Short y un recurso nuevo.</p><p><a class="m3d-boton" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" target="_blank" rel="noopener">▶ Suscribirme gratis</a></p>';
+        } catch (err) { aviso.textContent = 'No se ha podido enviar. Inténtalo otra vez.'; btn.disabled = false; }
+      });
+    })();
+  </script>
+  <script>
+    // Formulario de la web 3D gratis: se envía a la lista «Web 3D gratis» de Brevo.
+    (function () {
+      const f = document.getElementById('web3d'); if (!f) return;
+      const aviso = f.querySelector('.aviso-form');
+      const v = (n) => (f.elements[n].value || '').trim();
+      const boton = f.querySelector('button');
+      const textoBoton = () => { const t = (f.querySelector('input[name="tipo"]:checked') || {}).value; boton.textContent = t === 'gratis' ? 'Apúntate a la web gratis' : (window.PLAZAS_AGOTADAS ? 'Pedir mi web por 799 €' : 'Reservar por 99,99 €'); };
+      f.querySelectorAll('input[name="tipo"]').forEach((r) => r.addEventListener('change', textoBoton));
+      document.querySelectorAll('[data-tipo]').forEach((a) => a.addEventListener('click', () => { const r = f.querySelector('input[name="tipo"][value="' + a.dataset.tipo + '"]'); if (r) { r.checked = true; textoBoton(); } }));
+
+      // Plazas: cambia data-libres en <div id="promo"> cada vez que vendas una.
+      const promo = document.getElementById('promo');
+      if (promo) {
+        const total = Number(promo.dataset.total) || 10, libres = Math.max(0, Math.min(total, Number(promo.dataset.libres)));
+        document.querySelectorAll('.plazas-libres').forEach((el) => { el.textContent = libres; });
+        promo.querySelector('.plazas-total').textContent = total;
+        const barra = promo.querySelector('.promo__barra'); barra.setAttribute('aria-valuemax', total); barra.setAttribute('aria-valuenow', libres);
+        setTimeout(() => { barra.firstElementChild.style.width = Math.max(libres / total * 100, 2) + '%'; }, 400);
+        if (libres === 0) {
+          window.PLAZAS_AGOTADAS = true;
+          promo.classList.add('promo--agotada');
+          promo.querySelector('.promo__etq').textContent = 'Plazas de lanzamiento agotadas';
+          promo.querySelector('.promo__precio').innerHTML = '<b>799 €</b>';
+          promo.querySelector('.promo__nota').textContent = 'Las 10 plazas a 99,99 € ya se han vendido. Este es el precio normal.';
+          promo.querySelector('.promo__plazas').textContent = 'Quedan 0 plazas de lanzamiento';
+          promo.querySelector('.promo__cta').textContent = 'Pedir mi web por 799 €';
+          f.querySelector('.opcion-oferta').textContent = 'Pedir mi web por 799 €';
+          document.querySelectorAll('.promo-barra, .cta-fija').forEach((el) => { el.hidden = true; el.style.display = 'none'; });
+        }
+      }
+      textoBoton();
+      f.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (f.email_address_check.value) return;
+        for (const [n, msg] of [['NOMBRE', 'Escribe tu nombre.'], ['EMAIL', 'Revisa tu email.'], ['n', 'Escribe el nombre del negocio.'], ['c', 'Escribe la ciudad.'], ['s', 'Cuéntame a qué se dedica.']]) {
+          const el = f.elements[n];
+          if (!v(n) || (n === 'EMAIL' && !el.validity.valid)) { aviso.textContent = msg; el.focus(); return; }
+        }
+        if (!f.querySelector('#consentimiento-web').checked) { aviso.textContent = 'Marca la casilla para poder apuntarte.'; return; }
+        const btn = f.querySelector('button'); btn.disabled = true; aviso.textContent = 'Enviando…';
+        const tipo = (f.querySelector('input[name="tipo"]:checked') || {}).value || 'gratis';
+        const etiqueta = tipo === 'oferta' ? (window.PLAZAS_AGOTADAS ? '[799 €] ' : '[99,99 €] ') : '[Gratis] ';
+        const negocio = (etiqueta + v('n') + ' · ' + v('s') + ' · ' + v('c') + (v('x') ? ' · Quiere: ' + v('x') : '')).slice(0, 480);
+        const datos = new FormData();
+        datos.append('EMAIL', v('EMAIL')); datos.append('NOMBRE', v('NOMBRE')); datos.append('NEGOCIO', negocio);
+        datos.append('WEB', v('WEB') || 'Sin web'); datos.append('email_address_check', ''); datos.append('locale', 'es');
+        try {
+          await fetch(f.dataset.brevo, { method: 'POST', body: datos, mode: 'no-cors' });
+          f.innerHTML = (tipo === 'oferta'
+            ? '<p class="m3d-texto" style="font-size:1.15rem"><strong>¡Plaza reservada!</strong> En menos de 48 horas te escribo a tu correo con el pago y los siguientes pasos. No pagas nada hasta entonces.</p>'
+            : '<p class="m3d-texto" style="font-size:1.15rem"><strong>¡Apuntado!</strong> Esta semana te mando a tu correo el mini diagnóstico de tu negocio. El domingo a las 20:00 elijo la web de la semana.</p>')
+            + '<p class="m3d-texto">Si quieres enterarte antes de cada elección, únete al canal.</p><p><a class="m3d-boton" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" target="_blank" rel="noopener">▶ Suscribirme gratis</a></p>';
+        } catch (err) { aviso.textContent = 'No se ha podido enviar. Inténtalo otra vez.'; btn.disabled = false; }
+      });
+    })();
+
+    // Cuenta atrás hasta el próximo domingo a las 20:00 (hora de Madrid).
+    (function () {
+      const caja = document.getElementById('cuenta'); if (!caja) return;
+      function objetivo() {
+        const ahora = new Date();
+        const madrid = new Date(ahora.toLocaleString('en-US', { timeZone: 'Europe/Madrid' }));
+        const diff = ahora - madrid;
+        const t = new Date(madrid); t.setHours(20, 0, 0, 0);
+        let dias = (7 - t.getDay()) % 7; if (dias === 0 && madrid >= t) dias = 7;
+        t.setDate(t.getDate() + dias);
+        return new Date(t.getTime() + diff);
+      }
+      let fin = objetivo();
+      const u = (k) => caja.querySelector('[data-u="' + k + '"]');
+      function pinta() {
+        let r = Math.max(0, fin - Date.now()); if (r === 0) fin = objetivo();
+        const d = Math.floor(r / 864e5), h = Math.floor(r / 36e5) % 24, m = Math.floor(r / 6e4) % 60, s = Math.floor(r / 1e3) % 60;
+        u('d').textContent = d; u('h').textContent = h; u('m').textContent = String(m).padStart(2, '0'); u('s').textContent = String(s).padStart(2, '0');
+      }
+      pinta(); setInterval(pinta, 1000);
+    })();
+
+    // Botón fijo en móvil (aparece al pasar la portada) y aviso de suscripción (a mitad de página o a los 25 s, una vez).
+    (function () {
+      const fija = document.querySelector('.cta-fija'), kit = document.getElementById('kit');
+      const av = document.getElementById('suscribe');
+      const guardado = (() => { try { return localStorage.getItem('vc_suscribe_cerrado'); } catch (e) { return null; } })();
+      let mostrado = !!guardado;
+      const mostrar = () => { if (mostrado) return; mostrado = true; av.hidden = false; };
+      av.querySelector('.suscribe__x').addEventListener('click', () => { av.hidden = true; try { localStorage.setItem('vc_suscribe_cerrado', '1'); } catch (e) {} });
+      av.querySelector('a').addEventListener('click', () => { try { localStorage.setItem('vc_suscribe_cerrado', '1'); } catch (e) {} });
+      setTimeout(mostrar, 25000);
+      const visibles = new Set();
+      const obs = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) visibles.add(e.target); else visibles.delete(e.target); }));
+      obs.observe(kit); ['promo', 'web3d'].forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
+      addEventListener('scroll', () => {
+        const p = scrollY / (document.documentElement.scrollHeight - innerHeight);
+        if (p > 0.5) mostrar();
+        fija.classList.toggle('visible', scrollY > innerHeight * 0.8 && !visibles.size);
+      }, { passive: true });
+    })();
+  </script>
+  <script>
+    // Tarjeta del canal: cambia data-suscriptores en el HTML y se recalcula todo.
+    (function () {
+      const c = document.querySelector('.canal'); if (!c) return;
+      pintarCanal(Number(c.dataset.suscriptores) || 0);
+      // Suscriptores en vivo desde la API de YouTube (guardado 1 hora en el navegador para no gastar cuota).
+      const CLAVE = 'AIzaSyDquQjJ_oKEuLkU2SXDfp9iTRBFy7aPBHY', HORA = 36e5;
+      const API = 'https://www.googleapis.com/youtube/v3/';
+      const fmt0 = (v) => Number(v).toLocaleString('es-ES', { useGrouping: 'always' });
+      let cache = null; try { cache = JSON.parse(localStorage.getItem('vc_canal2') || 'null'); } catch (e) {}
+      if (cache && Date.now() - cache.t < HORA) pinta(cache);
+      else fetch(API + 'channels?part=statistics,contentDetails&forHandle=@VICECLIPSTUDIO&key=' + CLAVE)
+        .then((r) => r.json()).then(async (j) => {
+          const it = j.items && j.items[0]; const st = it && it.statistics;
+          if (!st || st.hiddenSubscriberCount || !Number(st.subscriberCount)) return;
+          const d = { t: Date.now(), n: Number(st.subscriberCount), vistas: Number(st.viewCount), videos: Number(st.videoCount) };
+          try {
+            const pl = await fetch(API + 'playlistItems?part=contentDetails&maxResults=7&playlistId=' + it.contentDetails.relatedPlaylists.uploads + '&key=' + CLAVE).then((r) => r.json());
+            const ids = pl.items.map((x) => x.contentDetails.videoId);
+            const v = await fetch(API + 'videos?part=snippet,statistics&id=' + ids.join(',') + '&key=' + CLAVE).then((r) => r.json());
+            const lista = ids.map((id) => v.items.find((x) => x.id === id)).filter(Boolean)
+              .map((x) => ({ id: x.id, titulo: x.snippet.title.replace(/#\S+/g, '').trim(), vistas: Number(x.statistics.viewCount), fecha: x.snippet.publishedAt }));
+            d.ultimo = lista[0]; d.mas = lista.slice(1, 7);
+          } catch (e) {}
+          pinta(d); try { localStorage.setItem('vc_canal2', JSON.stringify(d)); } catch (e) {}
+        }).catch(() => {});
+      function pinta(d) {
+        pintarCanal(d.n);
+        if (d.vistas) c.parentNode.querySelector('.canal__vistas').textContent = fmt0(d.vistas);
+        if (d.videos) c.parentNode.querySelector('.canal__videos').textContent = fmt0(d.videos);
+        const u = d.ultimo, caja = document.getElementById('ultimo'); if (!u || !caja) return;
+        const url = 'https://www.youtube.com/shorts/' + encodeURIComponent(u.id);
+        caja.querySelector('.ultimo__mini').href = url; caja.querySelector('.ultimo__ver').href = url;
+        caja.querySelector('img').src = 'https://i.ytimg.com/vi/' + encodeURIComponent(u.id) + '/hqdefault.jpg';
+        caja.querySelector('.ultimo__t').textContent = u.titulo;
+        const horas = Math.max(1, Math.round((Date.now() - new Date(u.fecha)) / 36e5));
+        const cuando = horas < 48 ? 'En ' + horas + ' horas' : 'En ' + Math.round(horas / 24) + ' días';
+        caja.querySelector('.ultimo__v').innerHTML = cuando + ' ya lo han visto <b>' + fmt0(u.vistas) + '</b> personas';
+        caja.hidden = false;
+        const rej = document.getElementById('shorts');
+        if (rej && d.mas && d.mas.length >= 3) {
+          rej.querySelector('.shorts__rejilla').innerHTML = d.mas.slice(0, d.mas.length >= 6 ? 6 : 3).map((s) =>
+            '<a class="short" href="https://www.youtube.com/shorts/' + encodeURIComponent(s.id) + '" target="_blank" rel="noopener" title="' + s.titulo.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])) + '">'
+            + '<img src="https://i.ytimg.com/vi/' + encodeURIComponent(s.id) + '/hqdefault.jpg" alt="" loading="lazy"><span>▶ ' + fmt0(s.vistas) + '</span></a>').join('');
+          rej.hidden = false;
+        }
+      }
+      function pintarCanal(n) {
+      const meta = Number(c.dataset.meta) || 1000;
+      document.querySelectorAll('.suscribe__n, .subs-vivo').forEach((el) => { el.textContent = n.toLocaleString('es-ES', { useGrouping: 'always' }); });
+      document.querySelectorAll('.subs-faltan').forEach((el) => { el.textContent = Math.max(meta - n, 0).toLocaleString('es-ES', { useGrouping: 'always' }); });
+      document.querySelectorAll('.en-vivo__barra span').forEach((el) => { el.style.width = Math.max(Math.min(n / meta * 100, 100), 2) + '%'; });
+      const fmt = (v) => v.toLocaleString('es-ES', { useGrouping: 'always' });
+      c.querySelector('.canal__num').textContent = fmt(n);
+      c.querySelector('.canal__resto').textContent = fmt(Math.max(meta - n, 0));
+      c.querySelector('.canal__falta').lastChild.textContent = ' para ' + fmt(meta);
+      const barra = c.querySelector('.canal__barra'); barra.setAttribute('aria-valuenow', n); barra.setAttribute('aria-valuemax', meta);
+      const pct = Math.max(Math.min(n / meta * 100, 100), 2);
+      if (c.dataset.visto) barra.firstElementChild.style.width = pct + '%';
+      else new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { c.dataset.visto = '1'; barra.firstElementChild.style.width = c.dataset.pct + '%'; o.disconnect(); } }), { threshold: .4 }).observe(c);
+      c.dataset.pct = pct;
+      }
+    })();
+  </script>
+  <script>
+    // ===== LIBRERÍA DE RECURSOS =====
+    // Para añadir uno, copia un bloque y rellena:
+    //   portada: portada dibujada con los colores de la web (etq, titulo, num, color 'rosa' o 'cian', lineas).
+    //   imagen: en lugar de portada, una imagen 16:9 (por ejemplo 'assets/recursos/mi-imagen.webp').
+    //   video: ID de un vídeo de YouTube (opcional). Añade el botón "Ver vídeo".
+    //   enlace: archivo (recursos/....pdf) o carpeta de Google Drive compartida como "Cualquiera con el enlace · Lector".
+    //           Si empieza por "#", lleva a esa sección de la web (el kit pide email).
+    //           Vacío = sale como "Muy pronto".
+    //   estado: "Nuevo", "Disponible", "En directo"... (opcional)
+    const RECURSOS = [
+      { titulo: 'Kit de 50 ganchos', texto: '50 ganchos, las 6 reglas de los 2 primeros segundos y el checklist antes de publicar. Te lo mando al correo.', estado: 'El más pedido', enlace: '#kit', boton: 'Quiero el kit',
+        portada: { etq: 'Kit gratis', titulo: '50 ganchos para <em>Shorts</em>', num: '50', color: 'rosa', lineas: ['NO HAGAS ESTO…', '¿CUÁNTO CUESTA…?', 'NADIE TE CUENTA…'] } },
+      { titulo: '5 plantillas de guion', texto: 'Mis formatos de 20 a 25 segundos, segundo a segundo. Rellenas los huecos, grabas la voz y montas.', estado: 'Nuevo', enlace: 'recursos/plantillas-guion.html', boton: 'Ver y descargar',
+        portada: { etq: 'Plantillas', titulo: '5 guiones de <em>20–25 s</em>', num: '5', color: 'cian', lineas: ['0–1,5 s GANCHO', '7–12 s SUSCRÍBETE', '19–23 s BUCLE'] } },
+      { titulo: '12 prompts de imágenes', texto: 'Escenas verticales de neón para tus Shorts, listas para generar en tu PC sin pagar.', estado: 'Nuevo', enlace: 'recursos/prompts-imagenes.html', boton: 'Ver y descargar',
+        portada: { etq: 'Prompts', titulo: '12 escenas <em>verticales</em>', num: '12', color: 'rosa', lineas: ['wide shot, tropical', 'pink and cyan neon', 'vertical 9:16'] } },
+      { titulo: 'Checklist de subida', texto: 'Los 15 puntos que reviso antes y después de publicar cada Short en YouTube.', estado: 'Nuevo', enlace: 'recursos/checklist-subida.html', boton: 'Ver y descargar',
+        portada: { etq: 'Checklist', titulo: 'Antes de <em>publicar</em>', num: '15', color: 'cian', lineas: ['☐ Título corto', '☐ Contenido IA', '☐ Comentario fijado'] } }
+    ];
+
+    (function () {
+      const caja = document.getElementById('recursos'); if (!caja) return;
+      const esc = (s) => String(s || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      const canal = 'https://www.youtube.com/@VICECLIPSTUDIO';
+      caja.innerHTML = RECURSOS.map((r, i) => {
+        const v = r.video ? 'https://www.youtube.com/watch?v=' + encodeURIComponent(r.video) : '';
+        const estado = r.enlace ? (r.estado || 'Disponible') : 'Muy pronto';
+        const clase = r.enlace ? 'estado--ya' : 'estado--pronto';
+        const po = r.portada;
+        const mini = po
+          ? '<span class="portada portada--' + (po.color === 'cian' ? 'cian' : 'rosa') + '"><span class="portada__txt"><span class="portada__etq">' + esc(po.etq) + '</span>'
+            + '<span class="portada__t">' + po.titulo + '</span></span><span class="portada__tel"><span class="portada__num">' + esc(po.num) + '</span>'
+            + (po.lineas || []).map((l) => '<span class="portada__fila">' + esc(l) + '</span>').join('') + '</span><span class="portada__gratis">Gratis</span></span>'
+          : r.imagen
+          ? '<img src="' + esc(r.imagen) + '" alt="" width="1280" height="720" loading="lazy">'
+          : r.video
+            ? '<img src="https://i.ytimg.com/vi/' + encodeURIComponent(r.video) + '/hqdefault.jpg" alt="" loading="lazy"><span class="recurso__play"></span>'
+            : '<b>' + esc(r.titulo) + '</b>';
+        const principal = r.enlace
+          ? '<a class="m3d-boton" href="' + esc(r.enlace) + '" data-i="' + i + '">' + esc(r.boton || 'Recursos') + '</a>'
+          : '<span class="m3d-boton m3d-boton--fantasma apagado">Muy pronto</span>';
+        return '<article class="m3d-tarjeta recurso m3d-reveal">'
+          + '<a class="recurso__mini" href="' + (r.enlace ? esc(r.enlace) : (v || canal)) + '"' + (r.enlace ? ' data-i="' + i + '"' : ' target="_blank" rel="noopener"') + ' tabindex="-1" aria-hidden="true">' + mini + '<span class="estado ' + clase + '">' + esc(estado) + '</span></a>'
+          + '<div class="recurso__cuerpo"><h3>' + esc(r.titulo) + '</h3><p>' + esc(r.texto) + '</p>'
+          + '<div class="recurso__botones">' + principal + (v ? '<a class="m3d-boton m3d-boton--fantasma" href="' + v + '" target="_blank" rel="noopener">Ver vídeo</a>' : '') + '</div></div></article>';
+      }).join('');
+
+      // Antes de abrir una carpeta de Drive, pide la suscripción (solo la primera vez).
+      const modal = document.getElementById('descarga');
+      const sub = modal.querySelector('.descarga__sub'), ir = modal.querySelector('.descarga__ir');
+      const t = modal.querySelector('h3'), p = modal.querySelector('.descarga__p');
+      const textos = [t.textContent, p.textContent, sub.textContent, ir.textContent];
+      const marcado = () => { try { return localStorage.getItem('vc_suscrito') === '1'; } catch (e) { return false; } };
+      const marcar = () => { try { localStorage.setItem('vc_suscrito', '1'); } catch (e) {} };
+      const cerrar = () => {
+        modal.hidden = true; [t.textContent, p.textContent, sub.textContent, ir.textContent] = textos;
+        sub.hidden = false; ir.className = 'm3d-boton m3d-boton--fantasma descarga__ir';
+      };
+      caja.addEventListener('click', (e) => {
+        const a = e.target.closest('a[data-i]'); if (!a) return;
+        if (window.zaraz) try { zaraz.track('recurso', { nombre: RECURSOS[a.dataset.i].titulo }); } catch (err) {}
+        const r = RECURSOS[a.dataset.i]; if (!r || r.enlace.charAt(0) === '#') return;
+        e.preventDefault();
+        if (marcado()) { window.open(r.enlace, '_blank', 'noopener'); return; }
+
+        ir.href = r.enlace; modal.hidden = false; ir.focus();
+      });
+      sub.addEventListener('click', () => {
+        marcar();
+        setTimeout(() => { t.textContent = '¡Gracias!'; p.textContent = 'Ya puedes descargar el recurso.'; sub.hidden = true; ir.textContent = 'Descargar ahora'; ir.className = 'm3d-boton descarga__ir'; }, 300);
+      });
+      ir.addEventListener('click', () => { marcar(); setTimeout(cerrar, 200); });
+      modal.querySelector('.descarga__x').addEventListener('click', cerrar);
+      modal.addEventListener('click', (e) => { if (e.target === modal) cerrar(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modal.hidden) cerrar(); });
+    })();
+  </script>
+  <script type="module" src="motor-3d/motor3d.js"></script>
+</body>
+</html>

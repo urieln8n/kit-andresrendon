@@ -1,0 +1,76 @@
+@font-face { font-family: "Space Grotesk"; src: url(../fonts/sg-700.woff2) format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Inter"; src: url(../fonts/inter-400.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Inter"; src: url(../fonts/inter-600.woff2) format("woff2"); font-weight: 600 800; font-display: swap; }
+@page { size: A4; margin: 0; }
+:root { --fondo:#0E0B1A; --panel:#17132A; --texto:#F4F1FA; --rosa:#FF4FA3; --cian:#3EE6E0; --niebla:#A8A0BF; --linea:#2E2747; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--fondo); color: var(--texto); font: 10.5pt/1.5 "Inter", system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.pag { width: 210mm; min-height: 297mm; padding: 18mm 17mm 16mm; position: relative; page-break-after: always; overflow: hidden;
+  background: var(--fondo); border-top: 3mm solid var(--rosa); }
+.pag:last-child { page-break-after: auto; }
+h1, h2, h3, .marca { font-family: "Space Grotesk", "Inter", system-ui, sans-serif; font-weight: 700; letter-spacing: -.02em; }
+h1 { font-size: 34pt; line-height: 1.02; margin: 6mm 0 5mm; }
+h1 em, h2 em { font-style: normal; color: var(--rosa); }
+h2 { font-size: 19pt; line-height: 1.1; margin-bottom: 4mm; }
+h3 { font-size: 12.5pt; margin-bottom: 1.5mm; }
+p { margin-bottom: 3mm; }
+.etq { display: inline-block; font-weight: 600; font-size: 9pt; color: var(--rosa); }
+.sub { color: var(--niebla); font-size: 12pt; max-width: 150mm; }
+.cab { display: flex; justify-content: space-between; align-items: center; font-size: 8.5pt; color: var(--niebla); margin-bottom: 9mm; }
+.cab b { color: var(--texto); }
+.vc { display: inline-grid; place-items: center; width: 9mm; height: 9mm; border-radius: 50%; border: 1.5px solid var(--cian); color: var(--rosa); font-weight: 800; font-size: 8pt; margin-right: 2.5mm; vertical-align: middle; }
+.pie { position: absolute; left: 17mm; right: 17mm; bottom: 9mm; display: flex; justify-content: space-between; font-size: 8pt; color: var(--niebla); border-top: 1px solid var(--linea); padding-top: 3mm; }
+.caja { background: #17132A; border: 1px solid var(--linea); border-radius: 4mm; padding: 5mm 6mm; margin-bottom: 4.5mm; }
+.caja--rosa { border-color: #8a3466; }
+.caja--cian { border-color: #2a7d80; }
+.chip { display: inline-block; font-size: 8pt; font-weight: 600; padding: .6mm 2.4mm; border-radius: 99mm; background: var(--rosa); color: var(--fondo); margin-right: 1.5mm; }
+.chip--cian { background: var(--cian); }
+.chip--linea { background: none; border: 1px solid var(--linea); color: var(--niebla); }
+table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 2mm 0 1mm; }
+th { text-align: left; font-size: 8pt; color: var(--niebla); font-weight: 600; padding: 1.5mm 2mm; border-bottom: 1px solid var(--linea); }
+td { padding: 2mm; border-bottom: 1px solid #2E2747; vertical-align: top; }
+td:first-child { color: var(--cian); font-weight: 700; white-space: nowrap; width: 18mm; }
+.guion { font-style: italic; color: #E7E2F3; }
+.hueco { color: var(--rosa); font-style: normal; font-weight: 600; }
+ul.lista, ol.lista { padding-left: 0; list-style: none; }
+ul.lista li, ol.lista li { position: relative; padding-left: 7mm; margin-bottom: 2.2mm; }
+ul.lista li::before { content: ""; position: absolute; left: 1mm; top: 1.9mm; width: 2.2mm; height: 2.2mm; border-radius: 50%; background: var(--cian); }
+ol.lista { counter-reset: n; }
+ol.lista li { counter-increment: n; }
+ol.lista li::before { content: counter(n); position: absolute; left: 0; top: 0; color: var(--rosa); font-weight: 800; }
+.check li { list-style: none; position: relative; padding-left: 8mm; margin-bottom: 2.6mm; }
+.check li::before { content: ""; position: absolute; left: 0; top: .6mm; width: 4mm; height: 4mm; border: 1.5px solid var(--rosa); border-radius: 1mm; }
+.check li b { color: var(--texto); }
+.check li span { display: block; color: var(--niebla); font-size: 9.2pt; }
+.prompt { font-family: "DejaVu Sans Mono", monospace; font-size: 8.4pt; line-height: 1.45; color: #E7E2F3; background: #0E0B1A; border: 1px solid var(--linea); border-radius: 2.5mm; padding: 3mm 3.5mm; margin-top: 1.5mm; }
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5mm; }
+.portada { display: flex; flex-direction: column; justify-content: center; }
+.portada .grande { font-size: 46pt; }
+.cta { margin-top: 8mm; padding: 6mm; border-radius: 4mm; background: #2a1636; border: 1px solid #8a3466; }
+.cta a { color: var(--rosa); font-weight: 700; text-decoration: none; }
+.nota { font-size: 8.6pt; color: var(--niebla); }
+
+/* ---------- En pantalla ---------- */
+.barra { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: .8rem 1.2rem; background: rgba(14,11,26,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--linea); font: 600 15px "Inter", sans-serif; }
+.barra a { color: var(--texto); text-decoration: none; opacity: .85; }
+.barra a:hover { opacity: 1; color: var(--rosa); }
+.barra .botones { display: flex; gap: .6rem; }
+.btn { border: 0; cursor: pointer; font: 600 15px "Inter", sans-serif; padding: .7rem 1.2rem; border-radius: 99px; text-decoration: none; display: inline-block; }
+.btn--rosa { background: var(--rosa); color: var(--fondo) !important; opacity: 1 !important; }
+.btn--yt { background: #ff0033; color: #fff !important; opacity: 1 !important; }
+@media screen {
+  html, body { font-size: 15px; }
+  .pag { width: auto; max-width: 210mm; min-height: 0; margin: 1.5rem auto; border-radius: 18px; border: 1px solid var(--linea); padding: 2.4rem 2.2rem 4rem; }
+  .pie { bottom: 1.2rem; left: 2.2rem; right: 2.2rem; }
+}
+@media screen and (max-width: 640px) {
+  .pag { margin: .8rem; padding: 1.6rem 1.2rem 3.6rem; }
+  h1, .portada .grande { font-size: 30px; }
+  h2 { font-size: 22px; }
+  .dos { grid-template-columns: 1fr; }
+  td:first-child { width: auto; }
+  .pie { left: 1.2rem; right: 1.2rem; }
+  .barra .ocultar-movil { display: none; }
+}
+@media print { .barra { display: none; } }

@@ -1,0 +1,53 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¡Confirmado! Tu kit de ganchos</title><meta name="theme-color" content="#0E0B1A"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><meta name="robots" content="noindex">
+<style>
+@font-face{font-family:"Space Grotesk";src:url(fonts/sg-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Inter";src:url(fonts/inter-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Inter";src:url(fonts/inter-600.woff2) format("woff2");font-weight:600;font-display:swap}
+*{box-sizing:border-box}body{margin:0;background:#0E0B1A;color:#F4F1FA;font:400 1.05rem/1.65 Inter,system-ui,sans-serif}
+main{max-width:44rem;margin:0 auto;padding:4rem 1.4rem 5rem}a{color:#3EE6E0}
+h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;line-height:1.1}h1{font-size:clamp(2.2rem,6vw,3.4rem);margin:.4rem 0 1rem}h1 em,h2 em{font-style:normal;color:#FF4FA3}
+h2{font-size:1.5rem;margin:0 0 .5rem}p,li{color:#D9D3E8}.marca{display:inline-flex;align-items:center;gap:.6rem;color:#F4F1FA;text-decoration:none;font-weight:600}
+.marca img{width:2.2rem;height:2.2rem}.boton{display:inline-block;background:#FF4FA3;color:#0E0B1A;font-weight:600;text-decoration:none;padding:.9rem 1.4rem;border-radius:99rem;margin:.4rem .6rem .4rem 0}
+.boton--f{background:transparent;color:#F4F1FA;border:1px solid #2E2747}.nota{font-size:.9rem;color:#A8A0BF}
+.paso{margin:2.4rem 0;padding:1.8rem;border-radius:1.2rem;background:linear-gradient(160deg,rgba(23,19,42,.95),rgba(14,11,26,.8));border:1px solid rgba(255,79,163,.5)}
+.paso__etq{font-weight:600;color:#FF4FA3;margin:0 0 .3rem}.paso__num{font:700 3rem/1 "Space Grotesk",Inter,sans-serif;color:#FF4FA3;margin:.6rem 0 0}.paso__num small{font-size:1rem;color:#F4F1FA}
+.barra{height:.5rem;border-radius:99rem;background:#2E2747;overflow:hidden;margin:.8rem 0 .4rem}.barra span{display:block;height:100%;width:2%;background:linear-gradient(90deg,#FF4FA3,#3EE6E0);border-radius:inherit;transition:width 1.4s ease}
+.recursos{list-style:none;padding:0;margin:1rem 0 0;display:grid;gap:.6rem}.recursos a{display:flex;justify-content:space-between;gap:1rem;padding:1rem 1.2rem;border-radius:1rem;border:1px solid #2E2747;background:rgba(23,19,42,.7);color:#F4F1FA;text-decoration:none;font-weight:600}
+.recursos a:hover{border-color:#3EE6E0}.recursos small{color:#A8A0BF;font-weight:400}
+</style></head><body><main><a class="marca" href="index.html"><img src="assets/logo-plano.svg" alt="">Andrés Rendón</a>
+
+<h1>¡Confirmado! Aquí tienes <em>tu kit</em></h1>
+<p>Ya estás dentro. Descárgalo aquí y guárdalo, que lo vas a usar en cada Short.</p>
+<p><a class="boton" href="assets/kit-de-ganchos-para-shorts.pdf" download>Descargar el kit (PDF)</a></p>
+
+<section class="paso">
+  <p class="paso__etq">Último paso · 10 segundos</p>
+  <h2>Únete al canal y no te pierdas <em>el siguiente</em></h2>
+  <p>Cada semana subo un Short nuevo y un recurso gratis. Y los domingos a las 20:00 regalo una web 3D a un negocio entre los que se apuntan. Si estás suscrito, te enterarás antes de cada elección.</p>
+  <p class="paso__num"><span id="subs">17</span> <small>creadores ya están dentro</small></p>
+  <div class="barra"><span id="barra"></span></div>
+  <p class="nota">Faltan <b id="faltan">983</b> para llegar a 1.000. Ayúdame con un clic.</p>
+  <a class="boton" href="https://www.youtube.com/@VICECLIPSTUDIO?sub_confirmation=1" target="_blank" rel="noopener">▶ Suscribirme gratis</a>
+</section>
+
+<h2>Llévate también estos, <em>gratis</em></h2>
+<ul class="recursos">
+  <li><a href="recursos/plantillas-guion.html">5 plantillas de guion <small>20–25 s →</small></a></li>
+  <li><a href="recursos/prompts-imagenes.html">12 prompts de imágenes <small>neón · 9:16 →</small></a></li>
+  <li><a href="recursos/checklist-subida.html">Checklist de subida <small>15 puntos →</small></a></li>
+</ul>
+
+<p class="nota" style="margin-top:2.4rem">¿Te ha llegado bien? Respóndeme al email y cuéntame en qué estás trabajando. Los leo todos.</p>
+</main>
+<script>
+  // Usa el número de suscriptores que guardó la portada (si lo hay).
+  (function () {
+    let d = null; try { d = JSON.parse(localStorage.getItem('vc_canal2') || 'null'); } catch (e) {}
+    const n = d && d.n ? d.n : 17, meta = 1000, f = (v) => v.toLocaleString('es-ES', { useGrouping: 'always' });
+    document.getElementById('subs').textContent = f(n);
+    document.getElementById('faltan').textContent = f(Math.max(meta - n, 0));
+    setTimeout(() => { document.getElementById('barra').style.width = Math.max(Math.min(n / meta * 100, 100), 2) + '%'; }, 300);
+  })();
+</script>
+</body></html>
