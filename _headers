@@ -11,6 +11,3 @@
 
 /emails/*
   X-Robots-Tag: noindex
-
-/.importar/*
-  X-Robots-Tag: noindex
