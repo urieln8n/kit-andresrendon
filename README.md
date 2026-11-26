@@ -1,6 +1,6 @@
 # kit.andresrendon.com
 
-Web del kit de VICECLIP STUDIO: recursos gratis para crear Shorts con IA y oferta de web 3D.
+Web del kit de Vice City Diario: recursos gratis para crear Shorts con IA y oferta de web 3D.
 
 **Cada cambio que se sube a `main` se publica solo** en https://kit.andresrendon.com (Cloudflare Pages, sin paso de compilación: la carpeta raíz es la web tal cual).
 

@@ -44,7 +44,7 @@ export default async function crear(THREE) {
   // channel row
   g.textAlign='left'; g.fillStyle='#17132A'; g.beginPath(); g.arc(70,1300,34,0,Math.PI*2); g.fill(); g.strokeStyle='#3EE6E0'; g.lineWidth=5; g.stroke();
   g.fillStyle='#ff4fa3'; g.font='700 28px "Space Grotesk"'; g.textAlign='center'; g.fillText('VC',70,1310);
-  g.textAlign='left'; g.fillStyle='#fff'; g.font='700 30px "Space Grotesk"'; g.fillText('@VICECLIPSTUDIO',120,1311);
+  g.textAlign='left'; g.fillStyle='#fff'; g.font='700 30px "Space Grotesk"'; g.fillText('Vice City Diario',120,1311);
   g.fillStyle='#ff4fa3'; g.beginPath(); g.roundRect(410,1280,180,44,22); g.fill(); g.fillStyle='#0e0b1a'; g.font='700 24px "Space Grotesk"'; g.fillText('Suscribirse',433,1310);
   // progress bar
   g.fillStyle='rgba(255,255,255,.25)'; g.fillRect(0,H-14,W,6); g.fillStyle='#ff4fa3'; g.fillRect(0,H-14,W*0.42,6);
